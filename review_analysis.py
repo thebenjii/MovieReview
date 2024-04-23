@@ -23,5 +23,5 @@ def analyze_movie_reviews(csv_filepath):
         else:
             print("No reviews found for this movie.")
 
-csv_path = 'IMDB Dataset.csv'  # Ensure this path is correct
+csv_path = 'Data/IMDB Dataset.csv'  # Ensure this path is correct
 analyze_movie_reviews(csv_path)
