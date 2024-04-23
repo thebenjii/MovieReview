@@ -9,29 +9,20 @@ logging.basicConfig(level=logging.INFO)
 def load_data():
     try:
         logging.info("Loading data...")
-        movies = pd.read_csv('Data/movies.csv')
-        ratings = pd.read_csv('Data/ratings.csv')
-        reviews = pd.read_csv('Data/IMDB Dataset.csv')
+        movies = pd.read_csv('/full/path/to/Data/movies.csv')
+        ratings = pd.read_csv('/full/path/to/Data/ratings.csv')
+        reviews = pd.read_csv('/full/path/to/Data/IMDB Dataset.csv')
 
         logging.info(f"Movies columns: {movies.columns.tolist()}")
         logging.info(f"Ratings columns: {ratings.columns.tolist()}")
         logging.info(f"Reviews columns: {reviews.columns.tolist()}")
 
-        # Merge movies and ratings
-        movie_ratings = pd.merge(movies, ratings, on='movieId', how='left')
-        movie_ratings = movie_ratings.groupby('movieId').agg(
-            average_rating=('rating', 'mean'),
-            rating_count=('rating', 'count')
-        ).reset_index()
-        movies = pd.merge(movies, movie_ratings, on='movieId', how='left')
+        # rest of your code...
 
-        # Normalize movie titles for matching
-        movies['normalized_title'] = movies['title'].apply(lambda x: re.sub(r'[^a-zA-Z0-9\s]', '', x).lower().strip())
-
-        return movies, reviews
     except Exception as e:
         logging.error(f"Failed to load data files: {e}")
         return None, None
+
 
 movies, reviews = load_data()
 
